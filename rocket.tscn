@@ -117,14 +117,15 @@ sprite_frames = SubResource("SpriteFrames_cum1y")
 animation = &"middle"
 autoplay = "middle"
 
-[node name="rocket_move" type="Node" parent="." node_paths=PackedStringArray("actor")]
+[node name="rocket_move2" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+position = Vector2(-1, 0)
 script = ExtResource("2_5gt1y")
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bttsxanhratid"
 
 [node name="input_movement" type="Node" parent="." node_paths=PackedStringArray("rocket")]
 script = ExtResource("3_r2l15")
-rocket = NodePath("../rocket_move")
+rocket = NodePath("../rocket_move2")
 metadata/_custom_type_script = "uid://dsmto7lxlrcdl"
 
 [node name="up" type="Marker2D" parent="."]

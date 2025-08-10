@@ -179,6 +179,5 @@ animation = &"star"
 
 [node name="rocket" parent="." instance=ExtResource("6_7mycd")]
 texture_filter = 1
-position = Vector2(1, 0)
 
 [node name="enemy_generator" parent="." instance=ExtResource("8_5vw27")]
