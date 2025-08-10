@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://j2hhe5nv1mpk"]
+
+[ext_resource type="PackedScene" uid="uid://6qe183we08dd" path="res://enemy.tscn" id="1_1arlw"]
+[ext_resource type="Texture2D" uid="uid://de5ppkolfpbpc" path="res://alien.png" id="2_r7n8l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0emce"]
+atlas = ExtResource("2_r7n8l")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xtgf"]
+atlas = ExtResource("2_r7n8l")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xde04"]
+atlas = ExtResource("2_r7n8l")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sumry"]
+atlas = ExtResource("2_r7n8l")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7i800"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0emce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xtgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xde04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sumry")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ky7lt"]
+radius = 5.72304
+height = 39.5531
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xm1pi"]
+radius = 8.24364
+
+[node name="alien_enemy" instance=ExtResource("1_1arlw")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+texture_filter = 1
+scale = Vector2(1.34375, 1.34375)
+sprite_frames = SubResource("SpriteFrames_7i800")
+frame_progress = 0.305496
+
+[node name="move_component" parent="." index="2"]
+velocity = Vector2(-80, 0)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="3"]
+position = Vector2(1.66893e-06, 6)
+scale = Vector2(3, 1.6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(2.84217e-14, 7)
+rotation = 1.57401
+scale = Vector2(2.44624, 1.11194)
+shape = SubResource("CapsuleShape2D_ky7lt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(1.30385e-08, 7)
+rotation = -1.59279
+scale = Vector2(1.57926, 1.27466)
+shape = SubResource("CapsuleShape2D_xm1pi")

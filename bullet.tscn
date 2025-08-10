@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://ba3upy2pgoeuq"]
+
+[ext_resource type="Texture2D" uid="uid://jlgq4gunpg0t" path="res://bullet.png" id="1_v8qja"]
+[ext_resource type="Script" uid="uid://tngthmxo5dnc" path="res://bullet_move.gd" id="2_v8qja"]
+[ext_resource type="Script" uid="uid://b55d0cyjyp1c0" path="res://hitbox_component.gd" id="3_t4vbm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8qja"]
+atlas = ExtResource("1_v8qja")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4vbm"]
+atlas = ExtResource("1_v8qja")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t2bd8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8qja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4vbm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2b2rl"]
+size = Vector2(21, 7)
+
+[node name="bullet" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_t2bd8")
+autoplay = "default"
+frame_progress = 0.255577
+
+[node name="bullet_move" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_v8qja")
+velocity = Vector2(400, 0)
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://tngthmxo5dnc"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.5, -0.5)
+scale = Vector2(1.05, 0.35)
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_t4vbm")
+metadata/_custom_type_script = "uid://b55d0cyjyp1c0"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_2b2rl")

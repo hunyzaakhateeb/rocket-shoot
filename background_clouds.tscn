@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://rds0lg2yd8na"]
+
+[ext_resource type="Texture2D" uid="uid://36jemwy6sjh1" path="res://test.png" id="1_2u21l"]
+[ext_resource type="Texture2D" uid="uid://cwiea8ixyhra" path="res://bg.png" id="2_gvw2j"]
+
+[node name="background_clouds" type="Node2D"]
+texture_filter = 1
+
+[node name="cloud1" type="Parallax2D" parent="."]
+repeat_size = Vector2(0, 320)
+autoscroll = Vector2(0, 25)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="cloud1"]
+texture = ExtResource("1_2u21l")
+centered = false
+offset = Vector2(-1, 0)
+
+[node name="cloud2" type="Parallax2D" parent="."]
+repeat_size = Vector2(0, 319)
+autoscroll = Vector2(0, 40)
+repeat_times = 2
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="cloud2"]
+texture_filter = 1
+position = Vector2(320, 160.125)
+scale = Vector2(1, 0.999219)
+texture = ExtResource("2_gvw2j")

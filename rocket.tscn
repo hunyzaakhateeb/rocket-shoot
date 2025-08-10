@@ -1,0 +1,171 @@
+[gd_scene load_steps=24 format=3 uid="uid://laa3spkfx76k"]
+
+[ext_resource type="Script" uid="uid://cupw5hts2xgkp" path="res://bullet.gd" id="1_awr8v"]
+[ext_resource type="Texture2D" uid="uid://c8mq2lnbpxhi7" path="res://fire.png" id="1_tpb7v"]
+[ext_resource type="Script" uid="uid://bttsxanhratid" path="res://rocket_move.gd" id="2_5gt1y"]
+[ext_resource type="Script" uid="uid://cb6tel4jqgt2m" path="res://stats_component.gd" id="2_edwur"]
+[ext_resource type="Texture2D" uid="uid://ql403jt17nce" path="res://rocket_space_ship.png" id="3_awr8v"]
+[ext_resource type="Script" uid="uid://dsmto7lxlrcdl" path="res://input_movement.gd" id="3_r2l15"]
+[ext_resource type="Script" uid="uid://ciesns3hjxt01" path="res://spawner_component.gd" id="6_7htxx"]
+[ext_resource type="PackedScene" uid="uid://ba3upy2pgoeuq" path="res://bullet.tscn" id="7_mnerj"]
+[ext_resource type="Script" uid="uid://7h17o63toaf5" path="res://hurtbox_component.gd" id="9_aw411"]
+[ext_resource type="Script" uid="uid://dmvykluy8s5uk" path="res://hurt_component.gd" id="10_mg04i"]
+[ext_resource type="PackedScene" uid="uid://v1mfku3og1uo" path="res://explosion_effect.tscn" id="11_ldhc3"]
+[ext_resource type="Script" uid="uid://b2f1edy2h061t" path="res://destroyed_component.gd" id="12_edwur"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cum1y"]
+atlas = ExtResource("1_tpb7v")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_546ky"]
+atlas = ExtResource("1_tpb7v")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awr8v"]
+atlas = ExtResource("1_tpb7v")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7htxx"]
+atlas = ExtResource("1_tpb7v")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnerj"]
+atlas = ExtResource("1_tpb7v")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm57y"]
+atlas = ExtResource("1_tpb7v")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xk1bh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cum1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_546ky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awr8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7htxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnerj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lm57y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xk1bh"]
+atlas = ExtResource("3_awr8v")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edwur"]
+atlas = ExtResource("3_awr8v")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw411"]
+atlas = ExtResource("3_awr8v")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cum1y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xk1bh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edwur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw411")
+}],
+"loop": true,
+"name": &"middle",
+"speed": 5.0
+}]
+
+[node name="rocket" type="Node2D"]
+position = Vector2(1, 0)
+script = ExtResource("1_awr8v")
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_edwur")
+metadata/_custom_type_script = "uid://cb6tel4jqgt2m"
+
+[node name="fire_animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(45, 160)
+rotation = -1.5708
+scale = Vector2(0.692053, 0.692053)
+sprite_frames = SubResource("SpriteFrames_xk1bh")
+autoplay = "default"
+frame_progress = 0.886514
+
+[node name="rocket_animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(80, 160)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_cum1y")
+animation = &"middle"
+autoplay = "middle"
+
+[node name="rocket_move" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_5gt1y")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://bttsxanhratid"
+
+[node name="input_movement" type="Node" parent="." node_paths=PackedStringArray("rocket")]
+script = ExtResource("3_r2l15")
+rocket = NodePath("../rocket_move")
+metadata/_custom_type_script = "uid://dsmto7lxlrcdl"
+
+[node name="up" type="Marker2D" parent="."]
+position = Vector2(103, 152)
+
+[node name="down" type="Marker2D" parent="."]
+position = Vector2(103, 168)
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("6_7htxx")
+scene = ExtResource("7_mnerj")
+metadata/_custom_type_script = "uid://ciesns3hjxt01"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("9_aw411")
+metadata/_custom_type_script = "uid://7h17o63toaf5"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtboxComponent"]
+polygon = PackedVector2Array(56, 160, 60, 149, 54, 135, 79, 140, 93, 148, 101, 151, 103, 152, 103, 168, 94, 170, 79, 179, 52, 186, 61, 169)
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+script = ExtResource("10_mg04i")
+stats_component = NodePath("../StatsComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
+metadata/_custom_type_script = "uid://dmvykluy8s5uk"
+
+[node name="explosion_spawn" type="Node2D" parent="."]
+texture_filter = 1
+script = ExtResource("6_7htxx")
+scene = ExtResource("11_ldhc3")
+metadata/_custom_type_script = "uid://ciesns3hjxt01"
+
+[node name="custom_destroyed_component_for_ship" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "rocket_animation", "destroy_effect_spawner_component")]
+script = ExtResource("12_edwur")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+rocket_animation = NodePath("../rocket_animation")
+destroy_effect_spawner_component = NodePath("../explosion_spawn")
+metadata/_custom_type_script = "uid://b2f1edy2h061t"

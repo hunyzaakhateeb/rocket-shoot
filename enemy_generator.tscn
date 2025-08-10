@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4yj342okrjae"]
+
+[ext_resource type="Script" uid="uid://bpiufif5t8fo3" path="res://enemy_generator.gd" id="1_b0aaj"]
+[ext_resource type="Script" uid="uid://ciesns3hjxt01" path="res://spawner_component.gd" id="2_8voho"]
+
+[node name="enemy_generator" type="Node2D"]
+script = ExtResource("1_b0aaj")
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(329.034, 1137.28)
+script = ExtResource("2_8voho")
+metadata/_custom_type_script = "uid://ciesns3hjxt01"
+
+[node name="timer_1" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="level_timer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
